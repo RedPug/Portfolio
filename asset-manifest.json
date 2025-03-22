@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.5d1db873.css",
-    "main.js": "/Portfolio/static/js/main.eba792da.js",
+    "main.css": "/Portfolio/static/css/main.5dea4e5e.css",
+    "main.js": "/Portfolio/static/js/main.ba51b0f6.js",
+    "static/media/Rowan-Headshot.png": "/Portfolio/static/media/Rowan-Headshot.f29f4f4a64826afb758d.png",
     "index.html": "/Portfolio/index.html",
-    "main.5d1db873.css.map": "/Portfolio/static/css/main.5d1db873.css.map",
-    "main.eba792da.js.map": "/Portfolio/static/js/main.eba792da.js.map"
+    "main.5dea4e5e.css.map": "/Portfolio/static/css/main.5dea4e5e.css.map",
+    "main.ba51b0f6.js.map": "/Portfolio/static/js/main.ba51b0f6.js.map"
   },
   "entrypoints": [
-    "static/css/main.5d1db873.css",
-    "static/js/main.eba792da.js"
+    "static/css/main.5dea4e5e.css",
+    "static/js/main.ba51b0f6.js"
   ]
 }
