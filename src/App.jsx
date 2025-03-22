@@ -1,25 +1,24 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/NavBar/Navbar';
-import Footer from './components/Footer/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-// import Projects from './pages/Projects';
-// import Contact from './pages/Contact';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Navbar from 'components/NavBar/Navbar';
+import Footer from 'components/Footer/Footer';
 
-import './App.css';
+import routesConfig from 'routesConfig';
+
+import 'App.css';
 
 function App() {
   return (
-    <Router basename="/Portfolio">
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="container">
         <Navbar />
         <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            {/* <Route path="/projects" element={<Projects />} /> */}
-            {/* <Route path="/contact" element={<Contact />} /> */}
-          </Routes>
+
+        <Routes>
+          {routesConfig.map((route, index) =>
+            <Route key={index} path={route.path} element={route.element} />
+          )}
+        </Routes>
+
         </main>
         <Footer />
       </div>

@@ -2,16 +2,26 @@ import { Link, useLocation} from 'react-router-dom';
 
 import './Navbar.css';
 
+
 export default function Navbar() {
-    const location = useLocation();
-    const path = location.pathname;
-    console.log(path);
 
     return (
-        <nav class="navbar">
+        <header>
+        <div class="navbar">
             <span className="name">Rowan Richards</span>
-            <Link to="/" className={"navbutton "+(path==="/" ? "active":"")}>Home</Link>
-            <Link to="/about" className={"navbutton "+(path==="/about" ? "active":"")}>About</Link>
-        </nav>
+            <NavButton path="/home">Home</NavButton>
+            <NavButton path="/about">About</NavButton>
+            <NavButton path="/projects">Projects</NavButton>
+        </div>
+        </header>
+    );
+}
+
+function NavButton({path, children}) {
+    const location = useLocation();
+    const currentPath = location.pathname;
+
+    return (
+        <Link to={path} className={"navbutton "+(currentPath === path ? "active" : "")}>{children}</Link>
     );
 }

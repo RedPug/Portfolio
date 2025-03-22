@@ -4,13 +4,21 @@ footer{
 }
 
 .contact-info{
-    color: #4e7a9c;
+    color: var(--accent-color);
     font-size: 20px;
-    margin: 10px 0;
 }
 
 .contact-email{
-    color: #4e7a9c;
-    font-size: 20px;
-    margin: 10px 0;
+    color: var(--accent-color);
+    font-size: large;
+}
+
+.social-link{
+    font-size: large;
+    color: var(--accent-color);
+}
+
+footer{
+    color: var(--accent-color);
+    margin-top: 10px;
 }

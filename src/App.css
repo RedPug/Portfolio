@@ -3,14 +3,27 @@
 }
 
 main{
-  margin-left:10%;
-  /* flex: 1; Allow main to grow and fill the available space */
+  margin-inline: clamp(0px, calc(15% - 550px * 0.15), 150px);
+  background-color: var(--background-color);
+  padding: 20px;
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  /* Shadow with offset 0, 10 fade radius, 5 spread*/
+  box-shadow: 0px 0px 10px 5px #7c7c7c;
+}
+
+.scroll-to-top{
+  scroll-margin-top: 55px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Full viewport height */
+
+  background-color: var(--background-accent-color);
 }
 
 html, body {

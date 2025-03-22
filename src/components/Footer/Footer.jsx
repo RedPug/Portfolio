@@ -8,11 +8,11 @@ export default function Footer(){
             </div>
 
             <div class="social-links">
-                <a href="https://linkedin.com/in/rowan-richards" target="_blank">LinkedIn</a>
-
-                <a href="https://github.com/redpug" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/rowan-richards" rel="noreferrer" target="_blank"  class="social-link">LinkedIn</a>
+                &nbsp;
+                <a href="https://github.com/redpug" rel="noreferrer" target="_blank"  class="social-link">GitHub</a>
             </div>
-            <p>©2024 Rowan Richards</p>
+            <p>©2025 Rowan Richards</p>
         </footer>
     </>
 }
