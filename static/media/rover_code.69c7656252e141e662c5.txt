@@ -1,0 +1,537 @@
+// main.ino
+//
+// Follows lines using two IR line sensors
+// Uses PixyCam2 to track objects
+// Picks up objects using a servo-powered claw
+// Plays music using a buzzer
+// Drives using two DC motors
+//
+// ENGR 7B Winter 2025, Team Pixel Patrol
+// Alec Apelian, Conner Blake, Samantha Huang, Naomi Kwan,
+// Rowan Richards, Trenton Tickenoff, Valerie Thai
+//
+// Last Modified: 3/14/2025
+
+
+
+
+#include <Pixy2.h>              // Allows communication with the Pixy2 camera
+#include <Servo.h>              // Controls the servo
+#include "CytronMotorDriver.h"  // Controls the motors
+
+
+//note: pitches.h must be installed manually through https://gist.github.com/mikeputnam/2820675
+//provides note frequencies for the songs
+#include "pitches.h"
+#define NOTE_REST 0
+
+
+//initialize control objects
+Servo servo;
+Pixy2 pixy; //pins 11-13
+
+
+//pin definitions
+const int SERVO_PIN = 10;
+const int LEFT_SENSOR_PIN = 5;
+const int RIGHT_SENSOR_PIN = 4;
+const int BUZZER_PIN = 9;
+
+
+//min and max angles for the servo
+const int SERVO_MIN = 0;
+const int SERVO_MAX = 80;
+
+
+//max motor speed
+const int MAX_SPEED = 255;
+
+
+//preliminary track: 0.8, 0.3, 0.0005
+//final track: 0.8, 0.3, 0.0005
+const float MAX_TURN_FAC = 0.8; //ranging from 0 to 2 to control max turn speed.
+const float INITIAL_TURN_RATE = 0.3; //starting turn rate
+const float TURN_GROWTH_FAC = 0.0005; //how fast turning rate increases
+
+
+//left motor on pins 6 and 7, right motor on pins 3 and 2
+CytronMD leftMotor(PWM_DIR, 6,7);
+CytronMD rightMotor(PWM_DIR, 3,2);
+
+
+//main program states
+const int IDLE = 0;
+const int FOLLOW_LINE = 1;
+const int TRACK_TARGET = 2;
+const int PICK_UP = 3;
+
+
+//movement states
+const int TURN_LEFT = 1;
+const int MOVE_FORWARD = 3;
+const int TURN_RIGHT = 2;
+const int STOPPED = 0;
+
+
+int programState;
+int movementState;
+
+
+//used for keeping track of time
+int pastMillis = 0;
+//# millis ellapsed in the last cycle
+int dt = 1;
+//used primarily for debugging
+int ticks = 0;
+
+
+//timer adds up to make sure that the course is actually done and not a sensor error
+int finishTimer = 0;
+//#ms all black to count as finished
+const int FINISH_THRESHOLD = 300;
+
+
+
+
+float turnRate = 0.0; //-1 to 1
+float driveSpeed = 1.0; //0 to 1
+int currentServoAngle = 0; //degrees
+
+
+
+
+//song definitions
+//formatted with bpm as first entry
+//followed by pairs of (freqeuncy, note size)
+int MR_ROBOTO[] = {
+  150,
+  NOTE_DS5, 8,
+  NOTE_DS5, 8,
+  NOTE_DS5, 8,
+  NOTE_DS5, 8,
+  NOTE_DS5, 8,
+  NOTE_D5, 4,
+
+
+  NOTE_DS5, 4,
+  NOTE_DS5, 4,
+
+
+  NOTE_D5, 8,
+  NOTE_DS5, 4,
+  NOTE_CS5, 4,
+
+
+  NOTE_DS5, 8,
+  NOTE_DS5, 8,
+
+
+  NOTE_REST, 1,
+
+
+  NOTE_DS5, 8,
+  NOTE_DS5, 8,
+
+
+  NOTE_REST, 1,
+};
+
+
+int TEQUILA[] = {
+  176,
+  NOTE_F4, 8, NOTE_REST, 8,
+  NOTE_F4, 8,
+  NOTE_E4, 8,
+  NOTE_G4, 8,
+  NOTE_E4, 8,
+  NOTE_REST, 8,
+  NOTE_F4, 8,
+  NOTE_REST, 8,
+  NOTE_C4, 8,
+
+
+  NOTE_REST, 4,
+
+
+  NOTE_C4, 8,
+  NOTE_F4, 8, NOTE_REST, 8,
+  NOTE_F4, 8,
+  NOTE_E4, 8,
+  NOTE_G4, 8,
+  NOTE_E4, 8,
+  NOTE_REST, 8,
+  NOTE_F4, 8,
+
+
+  // NOTE_REST, 1,
+};
+
+
+int START_SONG[] = {
+  60,
+  NOTE_G4, 8,
+  NOTE_REST, 8,
+
+
+  NOTE_G4, 8,
+  NOTE_REST, 8,
+
+
+  NOTE_G4, 8,
+  NOTE_REST, 8,
+
+
+  NOTE_C5, 4,
+};
+
+
+void setup() {
+  //set initial states
+  programState = FOLLOW_LINE;
+  movementState = STOPPED;
+
+
+  Serial.begin(9600);
+
+
+  //set up pins to do their I/O jobs.
+  pinMode(LEFT_SENSOR_PIN, INPUT);
+  pinMode(RIGHT_SENSOR_PIN, INPUT);
+
+
+  pinMode(BUZZER_PIN, OUTPUT);
+ 
+  //setup the servo and initialize its angle
+  servo.attach(SERVO_PIN);
+  servo.write(SERVO_MIN);
+  currentServoAngle = SERVO_MIN;
+
+
+  //start up the pixycam
+  pixy.init();
+
+
+  //play the countdown song to start
+  playSong(START_SONG, sizeof(START_SONG));
+}
+
+
+void loop() {
+  //find the amount of time since the last cycle
+  int currentMillis = millis();
+  dt = max(currentMillis - pastMillis,1);
+  pastMillis = currentMillis;
+
+
+  //do different things based on the desired state
+  switch(programState){
+    case IDLE:
+      //do nothing
+      movementState = STOPPED;
+      break;
+    case FOLLOW_LINE:
+      followLine();
+      break;
+    case TRACK_TARGET:
+      trackTarget();
+      break;
+    case PICK_UP:
+      //pick up the can
+      pickUp();
+      //revert to idle state when done
+      programState = IDLE;
+      break;
+    default:
+      //do nothing
+      break;
+  }
+
+
+  //this will run the motors as specified by the movement state, turn rate, and drive speed
+  drive();
+}
+
+
+
+
+
+
+//picks up the can and plays the Tequila song and drinks.
+void pickUp(){
+  //lowering angle when drinking
+  const int SERVO_LOWER = 45;
+  moveServo(SERVO_MAX);
+  playSong(TEQUILA, sizeof(TEQUILA));
+  moveServo(SERVO_LOWER);
+  delay(500);
+  moveServo(SERVO_MAX);
+  delay(500);
+  moveServo(SERVO_LOWER);
+
+
+  //keep playing the song and drinking
+  while(true){
+    playSong(TEQUILA, sizeof(TEQUILA));
+    moveServo(SERVO_MAX);
+    delay(500);
+    moveServo(SERVO_LOWER);
+  }
+}
+
+
+// smoothly moves the servo to the desired angle
+// returns when movement is complete
+void moveServo(int angle){
+  const int degPerSecond = 300;
+  //# ms per degree
+  const int timeStep = 1000/degPerSecond;
+
+
+  if(angle > currentServoAngle){
+    for(int i = currentServoAngle; i <= angle; i += 1){
+      servo.write(i);
+      delay(timeStep);
+    }
+  }else{
+    for(int i = currentServoAngle; i >= angle; i += -1){
+      servo.write(i);
+      delay(timeStep);
+    }
+  }
+
+
+  currentServoAngle = angle;
+}
+
+
+
+
+//drives the motors based on movement state, turn rate, and drive speed.
+void drive(){
+  //increase turning speed more as you go.
+  if(programState == FOLLOW_LINE){
+    //exponential growth function to turn faster with time when line following
+    turnRate = max(-MAX_TURN_FAC, min(MAX_TURN_FAC, turnRate * (1.0+TURN_GROWTH_FAC*float(dt))));
+  }
+
+
+  //ranging from -1 to 1, describing the desired motor speed as a proportion of its maximum
+  float leftSpeedFac;
+  float rightSpeedFac;
+
+
+  if(movementState == MOVE_FORWARD){
+    leftSpeedFac = 1.0;
+    rightSpeedFac = 1.0;
+  }else if(movementState == TURN_LEFT || movementState == TURN_RIGHT){
+    leftSpeedFac = constrain(1.0-turnRate, -1.0,1.0);
+    rightSpeedFac = constrain(1.0+turnRate, -1.0,1.0);
+  }else{
+    leftSpeedFac = 0.0;
+    rightSpeedFac = 0.0;
+  }
+
+
+  //drive motors based on desired rates.
+  leftMotor.setSpeed(int( MAX_SPEED * driveSpeed * leftSpeedFac ));
+  rightMotor.setSpeed(int(MAX_SPEED * driveSpeed * rightSpeedFac));
+}
+
+
+
+
+//sets the movement state conditions in order to follow the line
+void followLine(){
+  driveSpeed = 1.0; //drive at full speed when moving.
+
+
+  //gather sensor data
+  const int leftSensor = digitalRead(LEFT_SENSOR_PIN);
+  const int rightSensor = digitalRead(RIGHT_SENSOR_PIN);
+
+
+  //begin moving if you aren't already
+  if(movementState == STOPPED){
+    movementState = MOVE_FORWARD;
+    return;
+  }
+
+
+  //check for termination.
+  //if both sensors are triggered, the rover must be at the end
+  const int isFinished = leftSensor && rightSensor;
+
+
+  // if both sensors are triggered, keep going a little bit further to make sure the rover is at the end,
+  // not just temporarily seeing the line with both sensors
+  if(isFinished){
+    finishTimer += dt;
+    if(finishTimer >= FINISH_THRESHOLD){
+      programState = TRACK_TARGET;
+      movementState = STOPPED;
+      return;
+    }
+  }else{
+    finishTimer = 0;
+  }
+
+
+  const int isLeft = leftSensor && !rightSensor; //the line is to the left of the rover
+  const int isRight = rightSensor && !leftSensor; //the line is to the right of the rover
+
+
+  //true if we know where the line is. false otherwise
+  const int isValidConfig = isLeft || isRight;
+
+
+  if(isLeft && (movementState != TURN_LEFT)){
+    //if the line is to the left and it's not already turning left
+    //reset turn rate and set movementState to turning left
+    movementState = TURN_LEFT;
+    turnRate = INITIAL_TURN_RATE;
+  }else if(isRight && (movementState != TURN_RIGHT)){
+    //if the line is to the right and it's not already turning right
+    //reset turn rate and set movementState to turning right
+    movementState = TURN_RIGHT;
+    turnRate = -INITIAL_TURN_RATE;
+  }
+}
+
+
+
+
+
+
+const int CENTER_X = 150;     // The x-position that represents the center of the camera's view
+const int TARGET_WIDTH = 110; // The object's width when it is close enough to grab
+//gains for tracking
+const float Kp = 0.04;        // Proportional gain
+const float Ki = 0.001;       // Integral gain
+const float Kd = 0.001;       // Derivitive gain
+
+
+int lastError = 0;
+
+
+//integral gain value, adds up with time.
+float intGain = 0;
+
+
+void trackTarget() {
+  //gather pixyCam target data
+  pixy.ccc.getBlocks();
+
+
+  //if the camera found targets, track the first one
+  //otherwise, turn until you find one.
+  if(pixy.ccc.numBlocks > 0) {
+
+
+    int x = pixy.ccc.blocks[0].m_x; // x coord of block
+    int width = pixy.ccc.blocks[0].m_width; // width of block
+
+
+    float error = float(CENTER_X - x)/width;
+
+
+    float propGain = error;
+    intGain += error*(1.0/60); // Camera updates 60 times/second, aproximate integral of error over time
+    float derGain = (error - lastError)*60.0; // Change in error over 1/60 seconds
+
+
+    float PID_result = Kp*propGain + Ki*intGain + Kd*derGain;
+
+
+    lastError = error;
+
+
+    //turn based on the PID output
+    turnRate = PID_result;
+
+
+
+
+    //base drive speed, added upon when far away.
+    const float initial = 0.5;
+
+
+    //dive slow when close to the can, fast when far from the can.
+    driveSpeed = (1-float(width)/TARGET_WIDTH)*(1-initial)+initial;
+
+
+
+
+    //width is small, can is far away so move to it.
+    if(width < TARGET_WIDTH){
+      if(turnRate > 0){ // Check if turn is positive to turn right
+        movementState = TURN_RIGHT;
+      }else{//turn rate negative, turn left
+        movementState = TURN_LEFT;
+      }
+    }else{
+      //large width, can is close to claw, pick it up.
+      programState = PICK_UP;
+      movementState = STOPPED;
+    }
+  }else{//no objects detected, turn until you find one.
+    movementState = TURN_RIGHT;
+    turnRate = -MAX_TURN_FAC;
+    driveSpeed = 0.6;
+  }
+}
+
+
+// Uses the buzzer to play a song based on the input data.
+//
+// Pauses program execution while playing the song
+//
+// size0: the size of song in bytes
+//
+// song: song data formatted as follows:
+// [
+//  bpm,
+//  note1, note1Size,
+//  note2, note2Size,
+//  ...
+// ]
+//
+// bpm measures # of quarter beats per second.
+//
+// noteSize is 1 for a whole note, 2 for half note, 4 for quarter note, etc.
+//
+void playSong(int song[], int size0){
+ 
+  int bpm = song[0];
+  //song defined by pairs of (note, length) in single array, preceded by bpm
+  //number of notes = half song size
+  int size = (size0 / sizeof(int) - 1) / 2;
+
+
+  for (int i = 0; i < size; i++) {\
+    //frequency to play
+    const int note = song[i*2+1];
+
+
+    //1 second * beats per second * #beats (quarter note (4) = 1 beat, half note (2) = 2 beats, etc.)
+    const int duration = long(1000) * 60/bpm * 4/song[i*2+2];
+
+
+    //how much space between notes
+    const int gap_length = min(100, duration/5);
+
+
+    //how much time to play the note for
+    const int note_length = duration - gap_length;
+
+
+    //note = 0 is a rest, so don't do anything.
+    if(note != 0){
+      tone(BUZZER_PIN, note, note_length);
+    }
+
+
+    delay(note_length);
+    noTone(BUZZER_PIN);
+    delay(gap_length);
+  }
+}

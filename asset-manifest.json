@@ -1,14 +1,23 @@
 {
   "files": {
-    "main.css": "/Portfolio/static/css/main.79e3d035.css",
-    "main.js": "/Portfolio/static/js/main.f1ef3f34.js",
-    "static/media/Rowan-Headshot.png": "/Portfolio/static/media/Rowan-Headshot.f29f4f4a64826afb758d.png",
+    "main.css": "/Portfolio/static/css/main.93fefba2.css",
+    "main.js": "/Portfolio/static/js/main.e1fbed61.js",
+    "static/media/claw-test.webm": "/Portfolio/static/media/claw-test.0587f705f137a3aa5d62.webm",
+    "static/media/preliminary-track.webm": "/Portfolio/static/media/preliminary-track.9a7da8cede28d686b7c2.webm",
+    "static/media/final-competition.webm": "/Portfolio/static/media/final-competition.77b1fdbe0bbf7a9c88c2.webm",
+    "static/media/rover-wheels-turned.jpg": "/Portfolio/static/media/rover-wheels-turned.0f4a743924d7cca6b255.jpg",
+    "static/media/rover-thumbnail.jpg": "/Portfolio/static/media/rover-thumbnail.8f7de572a9b0dcf6f892.jpg",
+    "static/media/rowan-headshot.png": "/Portfolio/static/media/rowan-headshot.f29f4f4a64826afb758d.png",
+    "static/media/rear-pivot.png": "/Portfolio/static/media/rear-pivot.6a3181ad29c2ff55d7e9.png",
+    "static/media/side-profile-ramp.png": "/Portfolio/static/media/side-profile-ramp.77ee81762ab6662c55d8.png",
+    "static/media/center-of-mass.jpg": "/Portfolio/static/media/center-of-mass.d4c68ec3a33e7d18fc3d.jpg",
+    "static/media/rover_code.txt": "/Portfolio/static/media/rover_code.69c7656252e141e662c5.txt",
     "index.html": "/Portfolio/index.html",
-    "main.79e3d035.css.map": "/Portfolio/static/css/main.79e3d035.css.map",
-    "main.f1ef3f34.js.map": "/Portfolio/static/js/main.f1ef3f34.js.map"
+    "main.93fefba2.css.map": "/Portfolio/static/css/main.93fefba2.css.map",
+    "main.e1fbed61.js.map": "/Portfolio/static/js/main.e1fbed61.js.map"
   },
   "entrypoints": [
-    "static/css/main.79e3d035.css",
-    "static/js/main.f1ef3f34.js"
+    "static/css/main.93fefba2.css",
+    "static/js/main.e1fbed61.js"
   ]
 }
