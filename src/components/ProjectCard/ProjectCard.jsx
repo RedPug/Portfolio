@@ -8,7 +8,7 @@ export default function ProjectCard({title, nav, imgSrc, children}) {
         <div className="project-card">
         <Link to={nav} className="project-card__content">
                 <img src={imgSrc} alt={title} className="project-card__image" />
-                <h1>{title}</h1>
+                <h3>{title}</h3>
                 <p>{children}</p>
         </Link>
         </div>

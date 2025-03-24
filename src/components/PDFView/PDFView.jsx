@@ -1,7 +1,9 @@
 import React from "react";
 
+import './PDFView.css';
+
 export default function PDFView({url}) {
     return(
-        <iframe title={url} src={url} width="800px" height="480" allow="autoplay"></iframe>
+        <iframe title={url} src={url} allow="autoplay" className="pdf-view"></iframe>
     )
 }

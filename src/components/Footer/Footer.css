@@ -1,24 +1,18 @@
 footer{
+    color: var(--accent-color);
+    font-size: large;
+
     text-align: center;
     margin-top: auto; /* Pushes the footer to the bottom */
-}
-
-.contact-info{
-    color: var(--accent-color);
-    font-size: 20px;
-}
-
-.contact-email{
-    color: var(--accent-color);
-    font-size: large;
-}
-
-.social-link{
-    font-size: large;
-    color: var(--accent-color);
-}
-
-footer{
-    color: var(--accent-color);
     margin-top: 10px;
+}
+
+footer a{
+    color: var(--accent-color);
+    font-size: large;
+}
+
+footer p{
+    margin:0;
+    margin-bottom: 5px;
 }

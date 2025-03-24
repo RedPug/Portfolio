@@ -2,6 +2,15 @@
   text-align: center;
 }
 
+h1, h2, h3, h4, h5, h6{
+  /* color: #063e53; */
+  color: var(--accent-color)
+}
+
+h2{
+  text-decoration: underline;
+}
+
 main{
   margin-inline: clamp(0px, calc(15% - 550px * 0.15), 150px);
   background-color: var(--background-color);
@@ -14,7 +23,7 @@ main{
   box-shadow: 0px 0px 10px 5px #7c7c7c;
 }
 
-.scroll-to-top{
+.scroll-to-top, section, main{
   scroll-margin-top: 55px;
 }
 

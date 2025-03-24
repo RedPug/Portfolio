@@ -1,0 +1,27 @@
+video{
+    width: min(100%, 600px);
+    height: auto;
+
+    border: 3px solid black;
+}
+
+section{
+    margin-bottom:30px;
+}
+
+.caption{
+    margin-bottom: 5px;
+    font-weight: light;
+    font-style: italic;
+}
+
+.project-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-content-container{
+    margin-inline: 20px;
+}

@@ -6,7 +6,7 @@ import './ProjectsPage.css';
 
 export default function ProjectsPage() {
     return (
-        <div id="projects" className="scroll-to-top">
+        <div id="projects">
             <h1>Projects</h1>
             <p>This is the projects page.</p>
             <div className="projects-grid">

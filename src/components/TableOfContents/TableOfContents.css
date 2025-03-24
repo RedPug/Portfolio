@@ -1,0 +1,30 @@
+.toc-list a{
+    color:black;
+    text-decoration: none;
+    /* text-decoration: underline; */
+}
+
+.toc-list a:hover{
+    /* text-decoration: none; */
+    text-decoration: underline;
+}
+
+/*Un-nested list (first layer)*/
+.toc-list{
+    list-style-type: none;
+    padding-left: 20px;
+}
+/*Nested list*/
+.toc-list ul{
+    padding-left: 30px;
+}
+
+.toc-list li{
+    margin-top:10px;
+    /* padding:0; */
+    /* margin-left:15px; */
+}
+
+.toc-items{
+    border-left: 2px solid lightgray;
+}
