@@ -1,6 +1,8 @@
 :root {
     --accent-color: #4e7a9c;
-    --background-color: #ecf0f1;
+    --background-color: #fff;
+    /* --background-color: #f0f4f5; */
+    /* --background-color: #ecf0f1; */
     --background-accent-color: #d5dfe5;
     --background-indent-color: #dddddd;
     --text-color: #333;

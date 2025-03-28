@@ -1,0 +1,87 @@
+.projects-button{
+    background-color: var(--accent-color);
+    color: var(--background-color);
+
+    text-decoration: none;
+
+
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.projects-button:hover{
+    text-decoration: underline;
+}
+
+.projects-button-container{
+    display: flex;
+    justify-content: center;
+}
+
+.display-image{
+    width: min(100%, 600px);
+    padding: 5px;
+    border-radius: 5px;
+    margin-block: 10px;
+    background-color: var(--accent-color);
+}
+
+.banner {
+    
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #2279c8;
+    padding:10px;
+}
+
+.banner-inner {
+    position: relative;
+    /* position: absolute;
+    top: 10px;
+    left: 10px; */
+
+    width: 100%;
+    height: calc(97px*3);
+
+    background-repeat: repeat;
+    background-size: 97px, 97px;
+
+    border: 1px solid #56aaea;
+    border-bottom: none;
+    border-right: none;
+}
+
+.banner-overlay {
+    width: 100%;
+    height: 100%;
+
+
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+}
+
+.banner-overlay img{
+    height: 80%;
+    display: block;
+}
+
+.banner-header{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+    font-size: 2rem;
+    background-color: rgba(0, 0, 0, 0.3); /* Optional: Adds a slight background for contrast */
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.banner-header h1 {
+    margin: 0;
+    color: white;
+}

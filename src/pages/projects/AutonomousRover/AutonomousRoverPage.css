@@ -2,3 +2,19 @@
     overflow-y: scroll;
     height: 400px;
 }
+
+h2{
+    margin-left: -15px;
+}
+
+.large-celebration{
+    font-size: 5em;
+    font-weight: bold;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50px;
+    justify-self: center;
+
+    padding-block: 10px;
+    padding-inline: 30px;
+}

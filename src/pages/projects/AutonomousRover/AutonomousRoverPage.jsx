@@ -1,16 +1,24 @@
 import finalCompetitionVideo from "assets/projects/autonomous-rover/media/final-competition.webm";
 import clawTestVideo from "assets/projects/autonomous-rover/media/claw-test.webm";
+import cadDemoPicture from "assets/projects/autonomous-rover/media/cad-demo.png";
+import arduinoUno from "assets/projects/autonomous-rover/media/arduino-uno.jpg";
+import ganttChart from "assets/projects/autonomous-rover/media/gantt-chart.png";
+import courseDemo from "assets/projects/autonomous-rover/media/course-example.jpg";
+import clawModel from "assets/projects/autonomous-rover/media/claw-model.png";
+import banner from "assets/projects/autonomous-rover/media/blueprint-background-tile.jpg";
+import thumbnail from "assets/projects/autonomous-rover/media/rover-no-background.png";
 
 import rover_code from "assets/projects/autonomous-rover/data/rover_code.txt";
 
-import "./AutonomousRoverPage.css";
-import "../Project.css";
 import PDFView from "components/PDFView/PDFView";
-// import TableOfContents from "components/TableOfContents/TableOfContents";
 import { useEffect, useState } from "react";
-
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+
+import "../Project.css";
+import "./AutonomousRoverPage.css";
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import CaptionedVideo from "components/CaptionedVideo/CaptionedVideo";
+import { Link } from "react-router-dom";
 
 export default function AutonomousRoverPage(){
 
@@ -18,7 +26,6 @@ export default function AutonomousRoverPage(){
 
     useEffect(() => {
         fetch(rover_code).then(r=>r.text()).then(text=>{
-            console.log("Loaded rover code");
             setRoverCode(text);
         });
     },[])
@@ -26,46 +33,77 @@ export default function AutonomousRoverPage(){
 
     return(
         <div id="project-page">
-            <h1>Autonomous Rover</h1>
+            <div className="banner">
+                <div className="banner-inner" style={{backgroundImage:`url(${banner})`}}>
+                    <div className="banner-overlay">
+                        <img src={thumbnail} alt=""/>
+                    </div>
+
+                    <div className="banner-header">
+                        <h1>Autonomous Rover</h1>
+                    </div>
+                </div>
+                
+            </div>
+            
+
+            <hr className="big"/>
 
             <div className="project-content-container">
-
-                <hr />
-
-                {/* <TableOfContents sections={[
-                    {title: "About the Project", target: "#about"},
-                    {title: "Results", target: "#results"},
-                    {title: "Design Details", target: "#design-details"},
-                    {title: "Technical Drawings and CAD", target: "#technical-drawings", children: [
-                        {title: "Obstacle Course Rover", target: "#obstacle-course-rover"},
-                        {title: "Autonomous Rover", target: "#autonomous-rover"},
-                        {title: "Autonomous Rover Code", target: "#autonomous-rover-code"},
-                    ]},
-                ]}/>
-
-                <br />
-
-                <hr /> */}
 
                 <section id="about">
                     <h2>About the Project</h2>
                     <p>
-                        As part of the introductory engineering class ENGR 7B,
-                        I received the opportunity to design, build, and test an autonomous rover.
+                    In my introductory engineering class, ENGR 7B, I had the exciting opportunity to design, build, and test
+                    an autonomous rover from the ground up.
+                    This hands-on project challenged me to apply both technical and leadership skills to solve complex problems.
                     </p>
                     
                     <h3>Key Objectives</h3>
                         <ul>
-                            <li>Design, build, and program a rover from scratch</li>
-                            <li>Autonomously follow a line on the floor using IR sensors</li>
-                            <li>Use a PixyCam to track an object, then pick it up with a claw</li>
+                            <li>
+                                Develop a fully autonomous rover using IR sensors and a PixyCam
+                            </li>
+                            <li>
+                                Implement line-following capabilities for guided navigation
+                                <br />
+                                <img className="display-image" style={{width:"300px"}} src={courseDemo} alt="Black line track on the ground" />
+                            </li>
+                            <li>
+                                Engineer a robotic claw mechanism to detect, track, and capture objects
+                                <br />
+
+                                <div className="inline-container-left">
+                                    <img src={clawModel} style={{width:"40%"}} className="display-image" alt="Claw mechanism" />
+
+                                    <CaptionedVideo src={clawTestVideo} width="40%">
+                                        Initial Claw Test
+                                    </CaptionedVideo>
+                                </div>
+                            </li>
                         </ul>
 
                     <h3>Responsibilities</h3>
                     <ul>
-                        <li>Managed the team to turn in assignments and reports on time</li>
-                        <li>Designed the entirety of the rover in SolidWorks</li>
-                        <li>Programmed and tested the code for the autonomous rover using Arduino</li>
+                        <li>
+                            Designed a comprehensive 3D model of the rover in SolidWorks, ensuring functionality and structural integrity
+                            <br />
+                            <Link to="#technical-drawings" className="content-button">View Drawings Here</Link>
+                            <br />
+                            <img src={cadDemoPicture} className="display-image" alt="Rover 3D model" />
+                        </li>
+                        <li>
+                            Programmed and fine-tuned the Arduino-based control system for autonomous performance
+                            <br />
+                            <Link to="#code" className="content-button">View Code Here</Link>
+                            <br />
+                            <img className="display-image" style={{width:"300px"}} src={arduinoUno} alt="Arduino Uno microcontroller"/>
+                        </li>
+                        <li>
+                            Led the team to meet deadlines by managing assignments and reports efficiently
+                            <br />
+                            <img className="display-image" style={{width:"100%"}} src={ganttChart} alt="Gantt Chart showing deadlines and completition dates" />
+                        </li>
                     </ul>
                 </section>
 
@@ -73,41 +111,43 @@ export default function AutonomousRoverPage(){
                 
                 <section id="results">
                     <h2>Results</h2>
+
+                    <div className="large-celebration">
+                        2nd Place!
+                    </div>
+
                     <p>
-                        As a result of my ingenuity and problem solving skills, the rover placed second place in the final competition,
-                        and was one of only 4 teams to successfully complete the final challenge course, outcompeting 30 other teams.
+                    Leveraging a combination of ingenuity, problem-solving, and collaboration, my rover <b>secured second place</b> in the final competition.
+                    Out of over 30 teams, we were one of only four to successfully conquer the final challenge course.
+                    This accomplishment underscored our technical prowess and determination to excel under pressure.
                     </p>
 
-                    <div className="caption">
-                        Initial Claw Test
-                    </div>
-                    <video controls autoPlay muted loop>
-                        <source src={clawTestVideo} type="video/webm"></source>
-                        Your browser does not support the video tag.
-                    </video>
-                    
-
-                    <div className="caption">
-                        Final Competition
-                    </div>
-                    <video controls autoPlay muted loop>
-                        <source src={finalCompetitionVideo} type="video/webm"></source>
-                        Your browser does not support the video tag.
-                    </video>
+                    <CaptionedVideo src={finalCompetitionVideo}>
+                    Final Competition
+                    </CaptionedVideo>
                 </section>
 
                 <hr />
 
                 <section id="design-details">
-                    <h2>Design Details</h2>
+                    <h2>Design Challenges</h2>
                     <p>
-                        This rover was a particular headache to get working because of the complex claw mechanism.
-                        While we were offered two servo motors to close and lift the claw, I challenged myself by only using one.
+                        The claw mechanism was particularly challenging.
+                        While we were provided with two servo motors to manage the claw's closing and lifting functions,
+                        I opted to challenge myself by using only one motor.
                     </p>
                     <p>
-                        The design relies on rubber bands to grip a can, and uses a pulley mechanism to combine the claw's closing and lifitng action.
-                        One issue I ran into was that the servo didn't have the strength to lift the can.
-                        This was resolved by adding more rubber bands to pull back on the servo arm, assisting it when lifting.
+                        The design incorporated rubber bands to provide a secure grip on objects and a pulley system that
+                        combined the closing and lifting motions. However, the servo motor initially lacked the strength to
+                        lift the can. To resolve this, I applied additional rubber bands to counterbalance the servo arm,
+                        enhancing its lifting capacity. This innovative approach minimized complexity and reduced energy consumption.
+                    </p>
+
+                    <p>
+                        The original design used three IR sensors to detect the black line on the course. However, the sensors
+                        interfered with each other and caused unpredictable behavior during testing.
+                        To address this, I removed the middle sensor and adjusted the code to work without it. This modification
+                        improved the rover's line-following reliablility, but also reduced its effective speed.
                     </p>
                 </section>
 

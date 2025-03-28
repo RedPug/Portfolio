@@ -1,7 +1,8 @@
 import HomePage from 'pages/HomePage/HomePage';
 import AboutPage from 'pages/AboutPage/AboutPage';
 import ProjectsPage from 'pages/ProjectsPage/ProjectsPage';
-// import Project1Page from 'pages/projects/Project1Page';
+
+import ProjectWrapper from 'pages/projects/ProjectWrapper/ProjectWrapper';
 
 import projectList from 'Projects';
 
@@ -13,7 +14,7 @@ const routesConfig = [
   { path: '/projects', element: <ProjectsPage />},
   ...projectList.map(project => ({
     path: project.navSrc,
-    element: project.page
+    element: <ProjectWrapper>{project.page}</ProjectWrapper>
   })),
   //default case when no route is matched. Navigate to home page.
   {path: '*', element: <Navigate to="/home" replace /> }
