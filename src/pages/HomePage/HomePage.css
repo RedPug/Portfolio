@@ -68,3 +68,26 @@
     display: flex;
     justify-content: center;
 }
+
+.about-button-container{
+    display: flex;
+    justify-content: left;
+    margin-top:10px;
+}
+
+.about-button{
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    text-decoration: none;
+
+
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.about-button:hover{
+    text-decoration: underline;
+}

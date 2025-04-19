@@ -30,7 +30,6 @@
 }
 
 .banner {
-    
     width: 100%;
     box-sizing: border-box;
     background-color: #2279c8;
@@ -44,7 +43,7 @@
     left: 10px; */
 
     width: 100%;
-    height: calc(97px*3);
+    height: calc(97px*2);
 
     background-repeat: repeat;
     background-size: 97px, 97px;
@@ -76,12 +75,54 @@
     left: 20px;
     color: white;
     font-size: 2rem;
-    background-color: rgba(0, 0, 0, 0.3); /* Optional: Adds a slight background for contrast */
+    background-color: rgba(0, 0, 0, 0.3);
     padding: 10px 20px;
     border-radius: 8px;
 }
+
+@media (max-width: 1200px) {
+    .banner-header {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .banner-header {
+        font-size: 1rem;
+        padding: 5px 10px;
+    }
+}
+
+
 
 .banner-header h1 {
     margin: 0;
     color: white;
 }
+
+h2{
+    margin-left: -5px;
+}
+
+.large-celebration{
+    /* font-size: 5em; */
+    font-size: min(8vmin, 5em);
+    /* font-size: 100%; */
+
+    font-weight: bold;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 50px;
+    justify-self: center;
+
+    padding-block: 10px;
+    padding-inline: 30px;
+}
+
+/* @media (max-width: 1200px) {
+    .large-celebration {
+        font-size: 3em;
+        padding-block: 5px;
+        padding-inline: 20px;
+    }
+} */

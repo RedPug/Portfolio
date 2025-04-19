@@ -5,14 +5,14 @@ import arduinoUno from "assets/projects/autonomous-rover/media/arduino-uno.jpg";
 import ganttChart from "assets/projects/autonomous-rover/media/gantt-chart.png";
 import courseDemo from "assets/projects/autonomous-rover/media/course-example.jpg";
 import clawModel from "assets/projects/autonomous-rover/media/claw-model.png";
-import banner from "assets/projects/autonomous-rover/media/blueprint-background-tile.jpg";
-import thumbnail from "assets/projects/autonomous-rover/media/rover-no-background.png";
+// import thumbnail from "assets/projects/autonomous-rover/media/rover-no-background.png";
 
 import rover_code from "assets/projects/autonomous-rover/data/rover_code.txt";
 
-import PDFView from "components/PDFView/PDFView";
 import { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import PDFView from "components/PDFView/PDFView";
+
 
 import "../Project.css";
 import "./AutonomousRoverPage.css";
@@ -32,143 +32,124 @@ export default function AutonomousRoverPage(){
     
 
     return(
-        <div id="project-page">
-            <div className="banner">
-                <div className="banner-inner" style={{backgroundImage:`url(${banner})`}}>
-                    <div className="banner-overlay">
-                        <img src={thumbnail} alt=""/>
-                    </div>
-
-                    <div className="banner-header">
-                        <h1>Autonomous Rover</h1>
-                    </div>
-                </div>
+        <>
+            <section id="about">
+                <h2>About the Project</h2>
+                <p>
+                In the second part of my introductory engineering course, ENGR 7, I had the exciting opportunity to design, build, and test
+                an autonomous rover from the ground up.
+                This hands-on project challenged me to apply both technical and leadership skills to solve complex problems.
+                </p>
                 
-            </div>
-            
-
-            <hr className="big"/>
-
-            <div className="project-content-container">
-
-                <section id="about">
-                    <h2>About the Project</h2>
-                    <p>
-                    In my introductory engineering class, ENGR 7B, I had the exciting opportunity to design, build, and test
-                    an autonomous rover from the ground up.
-                    This hands-on project challenged me to apply both technical and leadership skills to solve complex problems.
-                    </p>
-                    
-                    <h3>Key Objectives</h3>
-                        <ul>
-                            <li>
-                                Develop a fully autonomous rover using IR sensors and a PixyCam
-                            </li>
-                            <li>
-                                Implement line-following capabilities for guided navigation
-                                <br />
-                                <img className="display-image" style={{width:"300px"}} src={courseDemo} alt="Black line track on the ground" />
-                            </li>
-                            <li>
-                                Engineer a robotic claw mechanism to detect, track, and capture objects
-                                <br />
-
-                                <div className="inline-container-left">
-                                    <img src={clawModel} style={{width:"40%"}} className="display-image" alt="Claw mechanism" />
-
-                                    <CaptionedVideo src={clawTestVideo} width="40%">
-                                        Initial Claw Test
-                                    </CaptionedVideo>
-                                </div>
-                            </li>
-                        </ul>
-
-                    <h3>Responsibilities</h3>
+                <h3>Key Objectives</h3>
                     <ul>
                         <li>
-                            Designed a comprehensive 3D model of the rover in SolidWorks, ensuring functionality and structural integrity
-                            <br />
-                            <Link to="#technical-drawings" className="content-button">View Drawings Here</Link>
-                            <br />
-                            <img src={cadDemoPicture} className="display-image" alt="Rover 3D model" />
+                            Develop a fully autonomous rover using IR sensors and a PixyCam
                         </li>
                         <li>
-                            Programmed and fine-tuned the Arduino-based control system for autonomous performance
+                            Implement line-following capabilities for guided navigation
                             <br />
-                            <Link to="#code" className="content-button">View Code Here</Link>
-                            <br />
-                            <img className="display-image" style={{width:"300px"}} src={arduinoUno} alt="Arduino Uno microcontroller"/>
+                            <img className="display-image" style={{width:"300px"}} src={courseDemo} alt="Black line track on the ground" />
                         </li>
                         <li>
-                            Led the team to meet deadlines by managing assignments and reports efficiently
+                            Engineer a robotic claw mechanism to detect, track, and capture objects
                             <br />
-                            <img className="display-image" style={{width:"100%"}} src={ganttChart} alt="Gantt Chart showing deadlines and completition dates" />
+
+                            <div className="inline-container-left">
+                                <img src={clawModel} style={{width:"40%"}} className="display-image" alt="Claw mechanism" />
+
+                                <CaptionedVideo src={clawTestVideo} width="40%">
+                                    Initial Claw Test
+                                </CaptionedVideo>
+                            </div>
                         </li>
                     </ul>
-                </section>
 
-                <hr />
-                
-                <section id="results">
-                    <h2>Results</h2>
+                <h3>Responsibilities</h3>
+                <ul>
+                    <li>
+                        Designed a comprehensive 3D model of the rover in SolidWorks, ensuring functionality and structural integrity
+                        <br />
+                        <Link to="#technical-drawings" className="content-button">View Drawings Here</Link>
+                        <br />
+                        <img src={cadDemoPicture} className="display-image" alt="Rover 3D model" />
+                    </li>
+                    <li>
+                        Programmed and fine-tuned the Arduino-based control system for autonomous performance
+                        <br />
+                        <Link to="#code" className="content-button">View Code Here</Link>
+                        <br />
+                        <img className="display-image" style={{width:"300px"}} src={arduinoUno} alt="Arduino Uno microcontroller"/>
+                    </li>
+                    <li>
+                        Led the team to meet deadlines by managing assignments and reports efficiently
+                        <br />
+                        <img className="display-image" style={{width:"100%"}} src={ganttChart} alt="Gantt Chart showing deadlines and completition dates" />
+                    </li>
+                </ul>
+            </section>
 
-                    <div className="large-celebration">
-                        2nd Place!
-                    </div>
+            <hr />
+            
+            <section id="results">
+                <h2>Results</h2>
 
-                    <p>
-                    Leveraging a combination of ingenuity, problem-solving, and collaboration, my rover <b>secured second place</b> in the final competition.
-                    Out of over 30 teams, we were one of only four to successfully conquer the final challenge course.
-                    This accomplishment underscored our technical prowess and determination to excel under pressure.
-                    </p>
+                <div className="large-celebration">
+                    2nd Place!
+                </div>
 
-                    <CaptionedVideo src={finalCompetitionVideo}>
-                    Final Competition
-                    </CaptionedVideo>
-                </section>
+                <p>
+                Leveraging a combination of ingenuity, problem-solving, and collaboration, my rover <b>secured second place</b> in the final competition.
+                Out of over 30 teams, we were one of only four to successfully conquer the final challenge course.
+                This accomplishment underscored our technical prowess and determination to excel under pressure.
+                </p>
 
-                <hr />
+                <CaptionedVideo src={finalCompetitionVideo}>
+                Final Competition
+                </CaptionedVideo>
+            </section>
 
-                <section id="design-details">
-                    <h2>Design Challenges</h2>
-                    <p>
-                        The claw mechanism was particularly challenging.
-                        While we were provided with two servo motors to manage the claw's closing and lifting functions,
-                        I opted to challenge myself by using only one motor.
-                    </p>
-                    <p>
-                        The design incorporated rubber bands to provide a secure grip on objects and a pulley system that
-                        combined the closing and lifting motions. However, the servo motor initially lacked the strength to
-                        lift the can. To resolve this, I applied additional rubber bands to counterbalance the servo arm,
-                        enhancing its lifting capacity. This innovative approach minimized complexity and reduced energy consumption.
-                    </p>
+            <hr />
 
-                    <p>
-                        The original design used three IR sensors to detect the black line on the course. However, the sensors
-                        interfered with each other and caused unpredictable behavior during testing.
-                        To address this, I removed the middle sensor and adjusted the code to work without it. This modification
-                        improved the rover's line-following reliablility, but also reduced its effective speed.
-                    </p>
-                </section>
+            <section id="design-details">
+                <h2>Design Challenges</h2>
+                <p>
+                    The claw mechanism was particularly challenging.
+                    While we were provided with two servo motors to manage the claw's closing and lifting functions,
+                    I opted to challenge myself by using only one motor.
+                </p>
+                <p>
+                    The design incorporated rubber bands to provide a secure grip on objects and a pulley system that
+                    combined the closing and lifting motions. However, the servo motor initially lacked the strength to
+                    lift the can. To resolve this, I applied additional rubber bands to counterbalance the servo arm,
+                    enhancing its lifting capacity. This innovative approach minimized complexity and reduced energy consumption.
+                </p>
 
-                <hr />
-                
-                <section id="technical-drawings">
-                    <h2>Technical Drawings</h2>
-                    <PDFView url="https://drive.google.com/file/d/1eM-5li44w-r2npWuT7uIfWKKNNkWVAvM/preview" />
-                </section>
+                <p>
+                    The original design used three IR sensors to detect the black line on the course. However, the sensors
+                    interfered with each other and caused unpredictable behavior during testing.
+                    To address this, I removed the middle sensor and adjusted the code to work without it. This modification
+                    improved the rover's line-following reliablility, but also reduced its effective speed.
+                </p>
+            </section>
 
-                <hr />
-                
-                <section id="code">
-                    <h2>Code</h2>
-                    <div className="code-container">
-                        {roverCode != null ? <SyntaxHighlighter language="c" style={vscDarkPlus}>{roverCode}</SyntaxHighlighter> : <p>Loading...</p>}
-                    </div>
-                </section>
-                
-                <hr />
-            </div>
-        </div>
+            <hr />
+            
+            <section id="technical-drawings">
+                <h2>Technical Drawings</h2>
+                <PDFView url="https://drive.google.com/file/d/1eM-5li44w-r2npWuT7uIfWKKNNkWVAvM/preview" />
+            </section>
+
+            <hr />
+            
+            <section id="code">
+                <h2>Code</h2>
+                <div className="code-container">
+                    {roverCode != null ? <SyntaxHighlighter language="c" style={vscDarkPlus}>{roverCode}</SyntaxHighlighter> : <p>Loading...</p>}
+                </div>
+            </section>
+            
+            <hr />
+        </>
     )
 }

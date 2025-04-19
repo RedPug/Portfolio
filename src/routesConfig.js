@@ -14,7 +14,7 @@ const routesConfig = [
   { path: '/projects', element: <ProjectsPage />},
   ...projectList.map(project => ({
     path: project.navSrc,
-    element: <ProjectWrapper>{project.page}</ProjectWrapper>
+    element: <ProjectWrapper title={project.title}>{project.page}</ProjectWrapper>
   })),
   //default case when no route is matched. Navigate to home page.
   {path: '*', element: <Navigate to="/home" replace /> }

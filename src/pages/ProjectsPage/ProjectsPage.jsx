@@ -5,7 +5,7 @@ export default function ProjectsPage() {
     return (
         <div id="projects">
             <h1>Projects</h1>
-            <p>This is the projects page.</p>
+            <p>These are my main projects!</p>
             <ProjectGrid onlyFeatured={false} />
         </div>
     );

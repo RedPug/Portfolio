@@ -15,6 +15,11 @@ export default function HomePage() {
           <b>About Me</b>
           <br />
           I am a Mechanical Engineering student at the University of California, Irvine. In my free time, I enjoy learning new things, coding, and working on other fun engineering projects
+          
+          <br />
+          <div className="about-button-container">
+            <Link to="/about" className="about-button">Learn more about me</Link>
+          </div>
         </div>
 
         <img src={headshot} alt="Headshot" id="headshot"/>

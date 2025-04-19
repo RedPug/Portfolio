@@ -1,6 +1,8 @@
 import ProjectCard from "components/ProjectCard/ProjectCard";
 import projectList from "Projects";
 
+import "./ProjectGrid.css";
+
 
 export default function ProjectGrid({onlyFeatured}){
     return (
