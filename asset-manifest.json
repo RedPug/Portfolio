@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6e99ae46.css",
-    "main.js": "/static/js/main.9a873cf1.js",
+    "main.css": "/static/css/main.1173495f.css",
+    "main.js": "/static/js/main.a471e089.js",
     "static/media/claw-test.webm": "/static/media/claw-test.0587f705f137a3aa5d62.webm",
     "static/media/preliminary-track.webm": "/static/media/preliminary-track.9a7da8cede28d686b7c2.webm",
     "static/media/final-competition.webm": "/static/media/final-competition.77b1fdbe0bbf7a9c88c2.webm",
@@ -24,12 +24,16 @@
     "static/media/side-profile-ramp.png": "/static/media/side-profile-ramp.77ee81762ab6662c55d8.png",
     "static/media/center-of-mass.jpg": "/static/media/center-of-mass.d4c68ec3a33e7d18fc3d.jpg",
     "static/media/rover_code.txt": "/static/media/rover_code.69c7656252e141e662c5.txt",
+    "static/media/code-icon.svg": "/static/media/code-icon.1464a02776c9d214c25a09fc704673aa.svg",
+    "static/media/linkedin-logo.svg": "/static/media/linkedin-logo.a236a02cbeb24525fd3bcf55fc6e41c6.svg",
+    "static/media/github-logo.svg": "/static/media/github-logo.6fa18895f6e6c7772cab7049f7e05f59.svg",
     "index.html": "/index.html",
-    "main.6e99ae46.css.map": "/static/css/main.6e99ae46.css.map",
-    "main.9a873cf1.js.map": "/static/js/main.9a873cf1.js.map"
+    "static/media/gmail-logo.svg": "/static/media/gmail-logo.cf6e9da6207069eaa596237538127bcb.svg",
+    "main.1173495f.css.map": "/static/css/main.1173495f.css.map",
+    "main.a471e089.js.map": "/static/js/main.a471e089.js.map"
   },
   "entrypoints": [
-    "static/css/main.6e99ae46.css",
-    "static/js/main.9a873cf1.js"
+    "static/css/main.1173495f.css",
+    "static/js/main.a471e089.js"
   ]
 }
