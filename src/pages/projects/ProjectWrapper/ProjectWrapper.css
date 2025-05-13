@@ -37,10 +37,6 @@
 }
 
 .banner-inner {
-    position: relative;
-    /* position: absolute;
-    top: 10px;
-    left: 10px; */
 
     width: 100%;
     height: calc(97px*2);
@@ -51,6 +47,9 @@
     border: 1px solid #56aaea;
     border-bottom: none;
     border-right: none;
+
+    justify-items: center;
+    align-content: center;
 }
 
 .banner-overlay {
@@ -70,9 +69,7 @@
 }
 
 .banner-header{
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
+
     color: white;
     font-size: 2rem;
     background-color: rgba(0, 0, 0, 0.3);
@@ -100,8 +97,8 @@
     color: white;
 }
 
-h2{
-    margin-left: -5px;
+h3{
+    font-size: 1.5em;
 }
 
 .large-celebration{
@@ -118,11 +115,3 @@ h2{
     padding-block: 10px;
     padding-inline: 30px;
 }
-
-/* @media (max-width: 1200px) {
-    .large-celebration {
-        font-size: 3em;
-        padding-block: 5px;
-        padding-inline: 20px;
-    }
-} */

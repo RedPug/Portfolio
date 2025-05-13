@@ -5,7 +5,6 @@ import arduinoUno from "assets/projects/autonomous-rover/media/arduino-uno.jpg";
 import ganttChart from "assets/projects/autonomous-rover/media/gantt-chart.png";
 import courseDemo from "assets/projects/autonomous-rover/media/course-example.jpg";
 import clawModel from "assets/projects/autonomous-rover/media/claw-model.png";
-// import thumbnail from "assets/projects/autonomous-rover/media/rover-no-background.png";
 
 import rover_code from "assets/projects/autonomous-rover/data/rover_code.txt";
 

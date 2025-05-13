@@ -3,16 +3,5 @@ footer{
     font-size: large;
 
     text-align: center;
-    margin-top: auto; /* Pushes the footer to the bottom */
-    margin-top: 10px;
-}
-
-footer a{
-    color: var(--accent-color);
-    font-size: large;
-}
-
-footer p{
-    margin:0;
-    margin-bottom: 5px;
+    margin: 10px;
 }

@@ -21,7 +21,6 @@ export default function SlideRuleAppPage(){
                 This project is an iOS application that simulates the functionality of a traditional slide rule,
                 allowing users to perform calculations using logarithmic scales.
             </p>
-
             <p>
                 The app features a user-friendly interface that mimics the physical slide rule, with a sliding cursor
                 to select values and perform calculations. Users can input values, select scales, and view results in real-time.

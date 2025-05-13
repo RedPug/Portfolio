@@ -3,44 +3,40 @@
 import headshot from "assets/media/rowan-headshot.png";
 
 import "./HomePage.css";
-import ProjectGrid from "components/ProjectGrid/ProjectGrid";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import ProjectStack from "components/ProjectStack/ProjectStack";
+import ContactBar from "components/ContactBar/ContactBar";
 
 export default function HomePage() {
   return (
     <div id="home">
-      <div className="head-container">
-        <div className="head-text">
-          <h1>Hi, I'm Rowan</h1>
-          <b>About Me</b>
-          <br />
-          I am a Mechanical Engineering student at the University of California, Irvine. In my free time, I enjoy learning new things, coding, and working on other fun engineering projects
-          
-          <br />
-          <div className="about-button-container">
-            <Link to="/about" className="about-button">Learn more about me</Link>
+      <section id="about">
+        <div className="head-container">
+          <div className="head-text">
+            <h1>Hi, I'm Rowan</h1>
+            <p style={{textAlign:"justify"}}>
+            I am a student pursing a <b>B.S. in Mechanical Engineering</b> at the University of California, Irvine
+            with a minor in <b>Information and Computer Science</b>.
+            In my free time, I enjoy coding, designing robots, and rock climbing.
+            I am passionate about learning new things and applying my knowledge to real-world problems.
+            </p>
           </div>
+
+          <img src={headshot} alt="Headshot" id="headshot"/>
         </div>
+      </section>
 
-        <img src={headshot} alt="Headshot" id="headshot"/>
-      </div>
+      <hr />
 
-      {/* <p>This is the home page.</p> */}
+      <section id="projects">
+        <h2>Featured Projects</h2>
+        <ProjectStack />
+      </section>
 
-      <section className="home-content">
-          
-        <hr />
+      <hr />
 
-        <h2>Selected Projects</h2>
-        
-        <ProjectGrid onlyFeatured={true} />
-
-        <div className="projects-button-container">
-          <Link to="/projects" className="projects-button">View all projects</Link>
-        </div>
-
-        <hr />
-
+      <section id="contact">
+        <ContactBar />
       </section>
       
 

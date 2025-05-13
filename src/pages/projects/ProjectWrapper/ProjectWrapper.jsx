@@ -21,7 +21,7 @@ export default function ProjectWrapper({children, title}){
                 {children}
                 
                 <div className="projects-button-container">
-                    <Link to="/projects" className="projects-button">View all projects</Link>
+                    <Link to="/#projects" className="projects-button">Go Back</Link>
                 </div>
             </div>
         </div>

@@ -23,7 +23,7 @@ export default function AboutPage(){
             <section>
 
                 <h3>Interests</h3>
-                <ul>
+                <ul class="centered-list">
                     <li>Robotics</li>
                     <li>Rockets</li>
                     <li>Mechanical design</li>
@@ -33,7 +33,7 @@ export default function AboutPage(){
                 </ul>
 
                 <h3>Fun Facts</h3>
-                <ul>
+                <ul class="centered-list">
                     <li>I love rock climbing</li>
                     <li>I listen to a lot of music, specifically 80's rock</li>
                     <li>My favorite ice cream flavors are strawberry and banana</li>
